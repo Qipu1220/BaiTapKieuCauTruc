@@ -13,6 +13,9 @@ void Nhap(NGAY&);
 void Xuat(NGAY);
 int ktNhuan(NGAY);
 int SoNgayToiDaTrongThang(NGAY);
+int SoThuTuTrongNam(NGAY);
+int SoNgayToiDaTrongNam(NGAY);
+int SoThuTu(NGAY);
 
 int main()
 {
@@ -22,7 +25,7 @@ int main()
 	cout << "Ngay la: ";
 	Xuat(a);
 
-	cout << "\nSo ngay toi da trong thang la: " << SoNgayToiDaTrongThang(a);
+	cout << "\nSo thu tu cua ngay la: " << SoThuTu(a);
 
 	return 0;
 }
@@ -59,4 +62,33 @@ int SoNgayToiDaTrongThang(NGAY x)
 	if (ktNhuan(x))
 		ngaythang[1] = 29;
 	return ngaythang[x.th - 1];
+}
+
+int SoThuTuTrongNam(NGAY x)
+{
+	int stt = 0;
+	for (int i = 1; i <= x.th - 1; i++)
+	{
+		NGAY temp = { 1,i,x.nm };
+		stt = stt + SoNgayToiDaTrongThang(temp);
+	}
+	return (stt + x.ng);
+}
+
+int SoNgayToiDaTrongNam(NGAY x)
+{
+	if (ktNhuan(x))
+		return 366;
+	return 365;
+}
+
+int SoThuTu(NGAY x)
+{
+	int stt = 0;
+	for (int i = 1; i < x.nm; i++)
+	{
+		NGAY temp = { 1,1,i };
+		stt = stt + SoNgayToiDaTrongNam(temp);
+	}
+	return (stt + SoThuTuTrongNam(x));
 }
