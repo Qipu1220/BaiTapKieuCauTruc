@@ -28,7 +28,7 @@ int main()
 	Xuat(b);
 
 	cout << "\nPhan so thu nhat - phan so thu hai: ";
-	Xuat(operator-(a, b));
+	Xuat(a-b);
 
 	return 0;
 }
